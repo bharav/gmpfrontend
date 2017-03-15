@@ -16,9 +16,6 @@ import '../node_modules/toastr/build/toastr.min.css';
 const store = configureStore();
 store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
-store.dispatch(loadNearByParkings());
-
-
 render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes} />

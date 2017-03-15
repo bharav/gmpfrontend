@@ -3,22 +3,22 @@ import ParkingListRow from './ParkingListRow';
 
 const ParkingList = ({parkingslots}) => {
   return (
-    <table className="table">
-      <thead>
-      <tr>
-        <th>&nbsp;</th>
-        <th>Name</th>
-        <th>Parking Type</th>
-        <th>Capacity</th>
-        <th>Availability</th>
-      </tr>
-      </thead>
-      <tbody>
-      {parkingslots.map(parkingslot =>
-        <ParkingListRow key={parkingslot._id} parkingslot={parkingslot}/>
-      )}
-      </tbody>
-    </table>
+
+
+  <div className="sidebar">
+     <div className="panel panel-default">
+      <div className="panel-heading">Available Parking Slots</div>
+      <div className="panel-body">
+        <div className="list-group">
+          {parkingslots.map(parkingslot =>
+                <ParkingListRow key={parkingslot._id} parkingslot={parkingslot}/>
+              )}
+        </div>
+      </div>
+    </div>
+    </div>
+
+
   );
 };
 

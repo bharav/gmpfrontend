@@ -1,18 +1,24 @@
 import * as types from './actionTypes';
 import nearbyparkingApi from '../api/mockNearByParkingApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
+import axios from 'axios';
 
 export function loadNearByParkingSuccess(parkingslots) {
   return { type: types.LOAD_PARKINGSLOTS_SUCCESS, parkingslots};
 }
-
+export function loadSubSlots(parkingslot){
+  return { type:types.LOAD_SUB_SLOTS,parkingslot}
+}
 export function loadNearByParkings() {
   return function(dispatch) {
     dispatch(beginAjaxCall());
-    return nearbyparkingApi.getNearByParkingSlot().then(parkingslots => {
-      dispatch(loadNearByParkingSuccess(parkingslots));
+    return axios.get('https://pure-fortress-87132.herokuapp.com/getMeNearByParkings?lng=77.69&lat=12.98').then(parkingslots => {
+     console.log(parkingslots);
+      dispatch(loadNearByParkingSuccess(parkingslots.data));
     }).catch(error => {
       throw(error);
     });
   };
 }
+
+

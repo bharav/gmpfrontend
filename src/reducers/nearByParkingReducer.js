@@ -9,3 +9,8 @@ export default function nearByParkingReducer(state = initialState.parkingslots, 
       return state;
   }
 }
+
+
+
+
+
