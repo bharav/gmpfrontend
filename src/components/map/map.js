@@ -3,9 +3,10 @@ import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps'
 
 class map extends Component {
     
-    OnClick_Event(lng,lat,e) {
+    OnClick_Event(loc,e) {
    
-   alert("Postion " + lat +"," + lng);
+  // alert("Postion " +  lng);
+   this.props.onClick(loc.coordinates); 
     
   }
     
@@ -21,7 +22,7 @@ class map extends Component {
                     lng:parseFloat(venue.geoLocation.coordinates[0])
                 }
             }
-            return <Marker key={i} {...marker} onClick={this.OnClick_Event.bind(this,venue.geoLocation.coordinates[0],venue.geoLocation.coordinates[1])} />
+            return <Marker key={i} {...marker} onClick={this.OnClick_Event.bind(this,venue.geoLocation)} />
         })
 
 

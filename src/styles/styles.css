@@ -56,3 +56,16 @@ nav {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.App-img{
+  float: left;
+}
+
+.App-headermod
+{
+
+}
+
+.App-headerText{
+  margin-top: 30px;
+}
