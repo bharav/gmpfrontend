@@ -9,22 +9,22 @@ class HomePage extends React.Component {
 
 
 constructor(){
-  super()
+  super();
   this.state={
     venue: [],
      CurrentLatitude: 'unknown',
     CurrentLongitude: 'unknown',
-    CoOrdinates: [],
-  } 
-  this.handleLanguage = this.handleLanguage.bind(this)
+    CoOrdinates: []
+  };
+  this.handleLanguage = this.handleLanguage.bind(this);
 }
 
 
 componentDidMount(){
 navigator.geolocation.getCurrentPosition(
       (position) => {     
-       var log = position.coords.longitude;
-       var lat = position.coords.latitude;
+       let log = position.coords.longitude;
+       let lat = position.coords.latitude;
         this.setState({CurrentLatitude:lat});
         this.setState({CurrentLongitude:log});  
           

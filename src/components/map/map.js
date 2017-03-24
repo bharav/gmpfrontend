@@ -6,7 +6,7 @@ class map extends Component {
     OnClick_Event(loc,e) {
    
   // alert("Postion " +  lng);
-   this.props.onClick(loc.coordinates); 
+   this.props.onClick(loc); 
     
   }
     
@@ -22,7 +22,7 @@ class map extends Component {
                     lng:parseFloat(venue.geoLocation.coordinates[0])
                 }
             }
-            return <Marker key={i} {...marker} onClick={this.OnClick_Event.bind(this,venue.geoLocation)} />
+            return <Marker key={i} {...marker} onClick={this.OnClick_Event.bind(this,venue)} />
         })
 
 
