@@ -9,7 +9,7 @@ const Header = ({loading}) => {
   return (
     <div className="App-header">
            
-          <img src={carbanner}/>
+         
               <div className="App-img">
                 <img src={logoimg} style={{ width:98, height:98}} alt="logo" />
                 </div>
