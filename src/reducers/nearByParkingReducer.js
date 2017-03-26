@@ -5,6 +5,8 @@ export default function nearByParkingReducer(state = initialState.parkingslots, 
   switch (action.type) {
     case types.LOAD_PARKINGSLOTS_SUCCESS:
       return action.parkingslots;
+    case types.BOOK_PARKINGSLOTS_SUCCESS:
+      return state;
     default:
       return state;
   }

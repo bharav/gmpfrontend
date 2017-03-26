@@ -11,9 +11,12 @@ class NearByParkingPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state ={
+      selectedSlot:'',
       parkingslots: this.props.parkingslots,
       SubSlots: this.props.SubSlots
     };
+     this.selectedSlot = this.selectedSlot.bind(this);
+     this.bookParking = this.bookParking.bind(this);
   }
   componentDidMount(){
     this.props.actions.loadNearByParkings();
@@ -33,6 +36,31 @@ class NearByParkingPage extends React.Component {
          this.setState({parkingslots:nextProps.parkingslots});
     }
   }
+  selectedSlot(event) {
+    debugger;
+    return this.setState({ selectedSlot: event.target.value });
+   }
+
+   bookParking(event){
+     event.preventDefault();
+
+   // if (!this.bookingFormIsValid()) {
+     // return;
+    //}
+
+    //this.setState({saving: true});
+    let bookingOject = {
+       "email": "test10@emc.com",
+       "booking":[
+         {
+           "parkingSlotId": this.state.parkingslotid,
+          "parkingSubSlotId": this.state.selectedSlot
+         }],
+        "vehicle": [{"registrationNumber": "KA03MC2231","vehicletype":"Car"
+            }]
+     };
+     this.props.actions.saveBookingParking(bookingOject);
+   }
   render() {
     return (
       <div>
@@ -43,7 +71,8 @@ class NearByParkingPage extends React.Component {
               </div>
               <div className="col-sm-8">
 
-                {this.state.SubSlots ? <ParkingSubList subslots={this.state.SubSlots.parkingSubSlots} parkingslotid ={this.state.SubSlots.parkingSlotId}/> : null}
+                {this.state.SubSlots ? <ParkingSubList subslots={this.state.SubSlots.parkingSubSlots}
+                 parkingslotid ={this.state.SubSlots.parkingSlotId} selectedSlot={this.state.selectedSlot} onChange={this.selectedSlot} onBooking = {this.bookParking}/> : null}
               </div>
             </div>
       </div>
