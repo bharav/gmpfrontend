@@ -10,8 +10,8 @@ export function loadSubSlots(parkingslot){
   return { type:types.LOAD_SUB_SLOTS,parkingslot}
 }
 
-export function BookParkingSuccess(message) {
-  return { type: types.BOOK_PARKINGSLOTS_SUCCESS, message};
+export function BookParkingSuccess(parkingslot) {
+  return { type: types.BOOK_PARKINGSLOTS_SUCCESS, parkingslot};
 }
 
 export function loadNearByParkings() {
@@ -32,7 +32,8 @@ export function saveBookingParking(bookingObject) {
     dispatch(beginAjaxCall());
      return axios.post('https://pure-fortress-87132.herokuapp.com/updateMyBooking',bookingObject).then(success => {
       console.log(success);
-      dispatch(BookParkingSuccess(success));
+      dispatch(BookParkingSuccess(bookingObject));
+      }).catch(error => {
       throw(error);
     });
   };

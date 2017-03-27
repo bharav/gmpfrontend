@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps'
 
 class map extends Component {
-    
+
     OnClick_Event(loc,e) {
-   
+
   // alert("Postion " +  lng);
-   this.props.onClick(loc); 
-    
+   this.props.onClick(loc);
+
   }
-    
-    
+
+
     render(){
+      debugger;
         const mapContainer = <div style={{height:'100%', width:'100%'}}></div>
 
         const marker = this.props.markers.map((venue,i) => {
-           
+
             const marker = {
                 position:{
                     lat:parseFloat(venue.geoLocation.coordinates[1]),
@@ -26,7 +27,7 @@ class map extends Component {
         })
 
 
-        return (        
+        return (
         <GoogleMapLoader
         containerElement = { mapContainer }
         googleMapElement = {
@@ -34,11 +35,11 @@ class map extends Component {
             defaultZoom={15}
             defaultCenter={this.props.center}
             options={{streetViewControl:false, mapTypeControl: false}}>
-            { marker }          
+            { marker }
 
             </GoogleMap>
         }/>
-        
+
         )
     }
 }
