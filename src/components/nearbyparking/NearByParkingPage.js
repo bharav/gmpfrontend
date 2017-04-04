@@ -22,10 +22,11 @@ class NearByParkingPage extends React.Component {
      this.handleLanguage = this.handleLanguage.bind(this);
      this.selectedSlot = this.selectedSlot.bind(this);
      this.bookParking = this.bookParking.bind(this);
+     
   }
 
   componentDidMount(){
-
+ 
     navigator.geolocation.getCurrentPosition(
       (position) => {
        let log = position.coords.longitude;
@@ -38,6 +39,9 @@ class NearByParkingPage extends React.Component {
       (error) => alert("ERROR" + JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     );
+
+    document.getElementById("mapMainContainer").style.height = (window.innerHeight-80)+'px';
+
   }
 
  componentWillReceiveProps(nextProps) {
@@ -45,7 +49,7 @@ class NearByParkingPage extends React.Component {
 
   }
   selectedSlot(event) {
-    debugger;
+    //debugger;
     return this.setState({ selectedSlot: event.target.value });
    }
 
@@ -74,11 +78,14 @@ class NearByParkingPage extends React.Component {
     toastr.success('Booking success');
     this.context.router.push('/nearbyparking');
   }
+
+  
    handleLanguage(ordinates) {
 
         this.setState({SubSlots: ordinates});
         this.setState({parkingslotid:ordinates.parkingSlotId})
     }
+  
   render() {
           const location ={
             lat:12.9816906,
@@ -96,18 +103,11 @@ class NearByParkingPage extends React.Component {
 
     return (
       <div>
-           <div className="row">
-              <div className="col-sm-4 sidebar-outer">
-                 <div style={{float:'left', width:1000, height:700, background:'white', paddingTop: '22px'}}>
-                    <Map center={location} markers={this.state.venue} onClick= {this.handleLanguage} />
-                </div>
+              <div className="sidebar-outer" id="mapMainContainer">
+                    <Map center={location} markers={this.state.venue} onClick= {this.handleLanguage}/>
               </div>
-              <div className="col-sm-8">
-
                 {this.state.SubSlots ? <ParkingSubList subslots={this.state.SubSlots.parkingSubSlots}
                  parkingslotid ={this.state.SubSlots.parkingSlotId} selectedSlot={this.state.selectedSlot} onChange={this.selectedSlot} onBooking = {this.bookParking}/> : null}
-              </div>
-            </div>
       </div>
     );
   }

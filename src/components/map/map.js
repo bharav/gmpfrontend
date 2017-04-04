@@ -12,7 +12,7 @@ class map extends Component {
 
 
     render(){
-      debugger;
+      //debugger;
         const mapContainer = <div style={{height:'100%', width:'100%'}}></div>
 
         const marker = this.props.markers.map((venue,i) => {

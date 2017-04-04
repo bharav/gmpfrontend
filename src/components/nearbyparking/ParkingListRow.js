@@ -15,7 +15,7 @@ class ParkingListRow extends React.Component{
    }
     ShowSubSlot(event) {
     event.preventDefault();
-    debugger;
+    //debugger;
     this.props.actions.loadSubSlots(this.state.parkingslot);
    }
    render() {

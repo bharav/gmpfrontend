@@ -27,7 +27,7 @@ export function loadNearByParkings() {
 }
 
 export function saveBookingParking(bookingObject) {
-  debugger;
+ //debugger;
   return function(dispatch) {
     dispatch(beginAjaxCall());
      return axios.post('https://pure-fortress-87132.herokuapp.com/updateMyBooking',bookingObject).then(success => {

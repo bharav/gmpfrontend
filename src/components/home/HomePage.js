@@ -17,6 +17,7 @@ constructor(){
     CoOrdinates: []
   };
   this.handleLanguage = this.handleLanguage.bind(this);
+  this.handleCenterChanged = this.handleCenterChanged.bind(this);
 }
 
 
@@ -49,7 +50,12 @@ navigator.geolocation.getCurrentPosition(
 }
 
 handleLanguage(ordinates) {
-        this.setState({CoOrdinates: ordinates});
+        this.setState({CoOrdinates: ordinates})
+    }
+
+    handleCenterChanged()
+    {
+      componentDidMount();
     }
 
   render() {
@@ -71,11 +77,8 @@ const location ={
 
     return (
       <div>
-        <div style={{float:'left', width:1000, height:700, background:'white', paddingTop: '22px'}}>
-        <Map center={location} markers={this.state.venue} onClick= {this.handleLanguage} />
+        <Map center={location} markers={this.state.venue} onClick= {this.handleLanguage} onCenterChanged ={this.handleCenterChanged}/>
         </div>
-      </div>
-
     );
   }
 }

@@ -7,7 +7,19 @@ import  carbanner from '../../images/Carbanner.jpg';
 
 const Header = ({loading}) => {
   return (
-    <div className="App-header">
+
+    <nav className="navbar navbar-inverse">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <a className="" href="#"> <img src={logoimg} style={{ width:50, height:50}} alt="logo" /> Get My Parking - </a> <span className="subheading">Find Parking. Book.</span>
+          </div>
+        </div>
+      </nav>
+
+
+
+
+  /*  <div className="App-header">
            
          
               <div className="App-img">
@@ -19,7 +31,7 @@ const Header = ({loading}) => {
                 <div>
                   <h4>Find Parking. Book.</h4>
                 </div>                  
-              </div>         
+              </div>  */       
             
         
    
