@@ -7,18 +7,18 @@ export function loadNearByParkingSuccess(parkingslots) {
   return { type: types.LOAD_PARKINGSLOTS_SUCCESS, parkingslots};
 }
 export function loadSubSlots(parkingslot){
-  return { type:types.LOAD_SUB_SLOTS,parkingslot}
+  return { type:types.LOAD_SUB_SLOTS,parkingslot};
 }
 
 export function BookParkingSuccess(parkingslot) {
   return { type: types.BOOK_PARKINGSLOTS_SUCCESS, parkingslot};
 }
 
-export function loadNearByParkings() {
+export function loadNearByParkings(lng,lat) {
   return function(dispatch) {
     dispatch(beginAjaxCall());
-    return axios.get('https://pure-fortress-87132.herokuapp.com/getMeNearByParkings?lng=77.69&lat=12.98').then(parkingslots => {
-     console.log(parkingslots);
+    return axios.get('https://pure-fortress-87132.herokuapp.com/getMeNearByParkings?lng='+lng+'&lat='+lat).then(parkingslots => {
+     //console.log(parkingslots);
       dispatch(loadNearByParkingSuccess(parkingslots.data));
     }).catch(error => {
       throw(error);
@@ -31,7 +31,7 @@ export function saveBookingParking(bookingObject) {
   return function(dispatch) {
     dispatch(beginAjaxCall());
      return axios.post('https://pure-fortress-87132.herokuapp.com/updateMyBooking',bookingObject).then(success => {
-      console.log(success);
+     // console.log(success);
       dispatch(BookParkingSuccess(bookingObject));
       }).catch(error => {
       throw(error);
