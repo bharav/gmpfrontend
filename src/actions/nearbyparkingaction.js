@@ -30,8 +30,9 @@ export function saveBookingParking(bookingObject) {
  //debugger;
   return function(dispatch) {
     dispatch(beginAjaxCall());
+    //console.log(bookingObject);
      return axios.post('https://pure-fortress-87132.herokuapp.com/updateMyBooking',bookingObject).then(success => {
-     // console.log(success);
+     //console.log(success);
       dispatch(BookParkingSuccess(bookingObject));
       }).catch(error => {
       throw(error);

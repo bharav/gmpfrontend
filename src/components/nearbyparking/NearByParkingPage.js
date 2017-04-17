@@ -55,12 +55,13 @@ class NearByParkingPage extends React.Component {
 
    bookParking(event){
      event.preventDefault();
+    //  debugger;
     let bookingOject = {
-       "email": "test10@emc.com",
+       "email": "test1@emc.com",
        "booking":[
          {
            "parkingSlotId": this.state.parkingslotid,
-          "parkingSubSlotId": this.state.selectedSlot
+          "parkingSubSlotId": parseInt(this.state.selectedSlot)
          }],
         "vehicle": [{"registrationNumber": "KA03MC2231","vehicletype":"Car"
             }]
