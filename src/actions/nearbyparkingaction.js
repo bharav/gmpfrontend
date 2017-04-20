@@ -18,7 +18,7 @@ export function loadNearByParkings(lng,lat) {
   return function(dispatch) {
     dispatch(beginAjaxCall());
     return axios.get('https://pure-fortress-87132.herokuapp.com/getMeNearByParkings?lng='+lng+'&lat='+lat).then(parkingslots => {
-     //console.log(parkingslots);
+     console.log(parkingslots);
       dispatch(loadNearByParkingSuccess(parkingslots.data));
     }).catch(error => {
       throw(error);

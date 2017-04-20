@@ -21,15 +21,16 @@ class NearByParkingPage extends React.Component {
       CurrentLatitude:null,
       CurrentLongitude:null
     };
-     this.handleLanguage = this.handleLanguage.bind(this);
+     this.clickedSlot = this.clickedSlot.bind(this);
      this.selectedSlot = this.selectedSlot.bind(this);
      this.bookParking = this.bookParking.bind(this);
-      this.dragend = this.dragend.bind(this);
-     
+     this.dragend = this.dragend.bind(this);
+     this.handleMapMounted = this.handleMapMounted.bind(this);
+
   }
 
   componentDidMount(){
- 
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
        let log = position.coords.longitude;
@@ -74,7 +75,6 @@ class NearByParkingPage extends React.Component {
       .catch(error => {
         toastr.error(error);
       });
-     ;
    }
 
    redirect() {
@@ -83,16 +83,19 @@ class NearByParkingPage extends React.Component {
     this.context.router.push('/nearbyparking');
   }
 
-  
-   handleLanguage(ordinates) {
 
-        this.setState({SubSlots: ordinates});
-        this.setState({parkingslotid:ordinates.parkingSlotId})
+   clickedSlot(selectedmarker) {
+      this.setState({SubSlots: selectedmarker});
+      this.setState({parkingslotid:selectedmarker.parkingSlotId})
     }
-
-  dragend(latitude){
-    debugger;
-      this.props.actions.loadNearByParkings(latitude.lng,latitude.lat);
+      handleMapMounted(map) {
+          this._map = map;
+       }
+  dragend(event){
+   let nextpos = this._map.getCenter();
+   const nextposJSON=nextpos.toJSON();
+   this.props.actions.loadNearByParkings(nextposJSON.lng,nextposJSON.lat);
+       //this.props.actions.loadNearByParkings(latitude.lng,latitude.lat);
   }
 
   render() {
@@ -101,7 +104,7 @@ class NearByParkingPage extends React.Component {
             lng:77.6939942
           };
 
-        if(this.state.CurrentLatitude ===null && this.state.CurrentLongitude ===null){ 
+        if(this.state.CurrentLatitude === null && this.state.CurrentLongitude ===null){
             location ={
             lat:12.9816906,
             lng:77.6939942
@@ -126,7 +129,7 @@ class NearByParkingPage extends React.Component {
     return (
       <div>
               <div className="sidebar-outer" id="mapMainContainer">
-                    <Map center={location} markers={this.state.venue} onClick= {this.handleLanguage} onDragend={this.dragend}/>
+                    <Map center={location} markers={this.state.venue} onSlotSelected= {this.clickedSlot} onMapMounted={this.handleMapMounted} onDragend={this.dragend}/>
               </div>
                 {this.state.SubSlots ? <ParkingSubList subslots={this.state.SubSlots.parkingSubSlots}
                  parkingslotid ={this.state.SubSlots.parkingSlotId} selectedSlot={this.state.selectedSlot} onChange={this.selectedSlot} onBooking = {this.bookParking}/> : null}
