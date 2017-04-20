@@ -17,11 +17,14 @@ class NearByParkingPage extends React.Component {
       selectedSlot:'',
       parkingslots: this.props.parkingslots,
       venue:this.props.parkingslots,
-      SubSlots: this.props.SubSlots
+      SubSlots: this.props.SubSlots,
+      CurrentLatitude:null,
+      CurrentLongitude:null
     };
      this.handleLanguage = this.handleLanguage.bind(this);
      this.selectedSlot = this.selectedSlot.bind(this);
      this.bookParking = this.bookParking.bind(this);
+      this.dragend = this.dragend.bind(this);
      
   }
 
@@ -86,14 +89,32 @@ class NearByParkingPage extends React.Component {
         this.setState({SubSlots: ordinates});
         this.setState({parkingslotid:ordinates.parkingSlotId})
     }
-  
+
+  dragend(latitude){
+    debugger;
+      this.props.actions.loadNearByParkings(latitude.lng,latitude.lat);
+  }
+
   render() {
-          const location ={
+          let location ={
             lat:12.9816906,
             lng:77.6939942
           };
 
-          const markers = [
+        if(this.state.CurrentLatitude ===null && this.state.CurrentLongitude ===null){ 
+            location ={
+            lat:12.9816906,
+            lng:77.6939942
+          };
+        }
+        else
+        {
+          location ={
+            lat:this.state.CurrentLatitude,
+            lng:this.state.CurrentLongitude
+          };
+        }
+         const markers = [
             {
                 location:{
                 lat:12.9816906,
@@ -105,7 +126,7 @@ class NearByParkingPage extends React.Component {
     return (
       <div>
               <div className="sidebar-outer" id="mapMainContainer">
-                    <Map center={location} markers={this.state.venue} onClick= {this.handleLanguage}/>
+                    <Map center={location} markers={this.state.venue} onClick= {this.handleLanguage} onDragend={this.dragend}/>
               </div>
                 {this.state.SubSlots ? <ParkingSubList subslots={this.state.SubSlots.parkingSubSlots}
                  parkingslotid ={this.state.SubSlots.parkingSlotId} selectedSlot={this.state.selectedSlot} onChange={this.selectedSlot} onBooking = {this.bookParking}/> : null}
