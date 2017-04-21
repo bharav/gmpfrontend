@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 
 const map = ({center,onMapMounted,onDragend,markers,onSlotSelected}) =>{
-  debugger;
         const mapContainer = <div style={{height:'100%', width:'100%'}}></div>;
         const marker = markers.map((venue,i) => {
             const marker = {

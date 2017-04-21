@@ -26,6 +26,7 @@ class NearByParkingPage extends React.Component {
      this.bookParking = this.bookParking.bind(this);
      this.dragend = this.dragend.bind(this);
      this.handleMapMounted = this.handleMapMounted.bind(this);
+     this.onClose = this.onClose.bind(this);
 
   }
 
@@ -56,7 +57,10 @@ class NearByParkingPage extends React.Component {
     //debugger;
     return this.setState({ selectedSlot: event.target.value });
    }
-
+onClose(event){
+ // debugger;
+  this.setState({SubSlots: null});
+}
    bookParking(event){
      event.preventDefault();
     //  debugger;
@@ -132,7 +136,7 @@ class NearByParkingPage extends React.Component {
                     <Map center={location} markers={this.state.venue} onSlotSelected= {this.clickedSlot} onMapMounted={this.handleMapMounted} onDragend={this.dragend}/>
               </div>
                 {this.state.SubSlots ? <ParkingSubList subslots={this.state.SubSlots.parkingSubSlots}
-                 parkingslotid ={this.state.SubSlots.parkingSlotId} selectedSlot={this.state.selectedSlot} onChange={this.selectedSlot} onBooking = {this.bookParking}/> : null}
+                 parkingslotid ={this.state.SubSlots.parkingSlotId} selectedSlot={this.state.selectedSlot} onChange={this.selectedSlot} onBooking = {this.bookParking} onPopUpClose ={this.onClose}/> : null}
       </div>
     );
   }
