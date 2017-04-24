@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import  carimage from '../../images/car.png';
 import  bikeimage from '../../images/motorbike.png';
-const ParkingSubList = ({subslots,parkingslotid,onChange,selectedSlot,onBooking,onPopUpClose}) =>{
-  //debugger
+const ParkingSubList = ({subslots,parkingslotid,parkingName,onChange,selectedSlot,onBooking,onPopUpClose}) =>{
+  debugger;
 
 
 function close() {
@@ -12,7 +12,7 @@ function close() {
   return (
 
           <div id="bookpanel" className="panel panel-primary border-0 center-block">
-              <div className="panel-heading">Parking Sub Slots <a href="#" className="btn-close" onClick={onPopUpClose} >&times;</a></div>
+              <div className="panel-heading">{parkingName} Sub Slots <a href="#" className="btn-close" onClick={onPopUpClose} >&times;</a></div>
               <div className="panel-body" style={{padding:'15px 40px'}}>
               {subslots.map(subslot =>
                         <div key={subslot._id}>
@@ -43,6 +43,7 @@ function close() {
 
 ParkingSubList.propTypes = {
   subslots: PropTypes.array.isRequired,
+  parkingName: PropTypes.array.isRequired,
   parkingslotid:PropTypes.number.isRequired,
   selectedSlot:PropTypes.string.isRequired,
   onChange : PropTypes.func.isRequired,

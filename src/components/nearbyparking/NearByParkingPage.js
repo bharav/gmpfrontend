@@ -89,8 +89,10 @@ onClose(event){
 
 
    clickedSlot(selectedmarker) {
+     debugger;
       this.setState({SubSlots: selectedmarker});
       this.setState({parkingslotid:selectedmarker.parkingSlotId})
+      this.setState({parkingName:selectedmarker.name})
     }
       handleMapMounted(map) {
           this._map = map;
@@ -103,6 +105,7 @@ onClose(event){
   }
 
   render() {
+    debugger;
           let location ={
             lat:12.9816906,
             lng:77.6939942
@@ -136,7 +139,7 @@ onClose(event){
                     <Map center={location} markers={this.state.venue} onSlotSelected= {this.clickedSlot} onMapMounted={this.handleMapMounted} onDragend={this.dragend}/>
               </div>
                 {this.state.SubSlots ? <ParkingSubList subslots={this.state.SubSlots.parkingSubSlots}
-                 parkingslotid ={this.state.SubSlots.parkingSlotId} selectedSlot={this.state.selectedSlot} onChange={this.selectedSlot} onBooking = {this.bookParking} onPopUpClose ={this.onClose}/> : null}
+                 parkingslotid ={this.state.SubSlots.parkingSlotId} parkingName={this.state.parkingName} selectedSlot={this.state.selectedSlot} onChange={this.selectedSlot} onBooking = {this.bookParking} onPopUpClose ={this.onClose}/> : null}
       </div>
     );
   }
