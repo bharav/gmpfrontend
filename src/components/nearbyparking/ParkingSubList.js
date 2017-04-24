@@ -21,7 +21,7 @@ function close() {
 
                             </div>
                           <div className = "caption">
-                            <p> <input type="radio" id="item4"
+                            <p> <input type="radio" id="item4" disabled={subslot.Availability === 0}
                              value= {subslot.parkingSubSlotId}
                              checked= {parseInt(selectedSlot) === subslot.parkingSubSlotId}
                              onChange={onChange} /><strong> Availability</strong> ({subslot.Availability}) </p>
