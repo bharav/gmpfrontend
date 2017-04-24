@@ -1,10 +1,14 @@
 import React, {PropTypes} from 'react';
-import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker, InfoWindow  } from 'react-google-maps';
 import  logoimg from '../../images/car-loc.png';
 
-const map = ({center,onMapMounted,onDragend,markers,onSlotSelected}) =>{
+
+    
+
+
+const map = ({center,onMapMounted,onDragend,markers,onSlotSelected,onMarkerOver}) =>{
         const mapContainer = <div style={{height:'100%', width:'100%'}}></div>;
-        debugger;
+   
         const marker = markers.map((venue,i) => {
             const marker = {
                 position:{
@@ -13,8 +17,21 @@ const map = ({center,onMapMounted,onDragend,markers,onSlotSelected}) =>{
                 }
     
             };
-            return <Marker key={i} {...marker} onClick={()=>onSlotSelected(venue)} icon={logoimg} defaultAnimation='2' />;
+            var show = false;
+            return <Marker key={i} {...marker} onMouseover={(e) => {show=true}} onClick={()=>onSlotSelected(venue)} icon={logoimg} defaultAnimation='2' >
+            { 
+                //show ?
+                    <InfoWindow>
+                       {venue.name}
+                    </InfoWindow>
+                 //    : null
+                  
+                }
+            
+            </Marker>;
         });
+
+            
      return (
         <GoogleMapLoader   containerElement = {mapContainer} googleMapElement = {
           <GoogleMap ref={onMapMounted}  defaultZoom={12}   defaultCenter={center}  options={{streetViewControl:false, mapTypeControl: false}}  onDragend={onDragend} >
@@ -25,11 +42,14 @@ const map = ({center,onMapMounted,onDragend,markers,onSlotSelected}) =>{
 };
 
 
+
+
 map.propTypes = {
   center: PropTypes.object.isRequired,
   markers:PropTypes.array.isRequired,
   onDragend : PropTypes.func.isRequired,
-  onSlotSelected:PropTypes.func.isRequired
+  onSlotSelected:PropTypes.func.isRequired,
+  onMarkerOver:PropTypes.func.isRequired
 };
 
 export default map;

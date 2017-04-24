@@ -27,6 +27,7 @@ class NearByParkingPage extends React.Component {
      this.dragend = this.dragend.bind(this);
      this.handleMapMounted = this.handleMapMounted.bind(this);
      this.onClose = this.onClose.bind(this);
+      this.MarkerMouseOver = this.MarkerMouseOver.bind(this);
 
   }
 
@@ -88,12 +89,16 @@ onClose(event){
   }
 
 
-   clickedSlot(selectedmarker) {
-     debugger;
+   clickedSlot(selectedmarker) {     
       this.setState({SubSlots: selectedmarker});
       this.setState({parkingslotid:selectedmarker.parkingSlotId})
       this.setState({parkingName:selectedmarker.name})
     }
+
+MarkerMouseOver(venueItem){
+    console.log("HI");
+}
+
       handleMapMounted(map) {
           this._map = map;
        }
@@ -136,7 +141,7 @@ onClose(event){
     return (
       <div>
               <div className="sidebar-outer" id="mapMainContainer">
-                    <Map center={location} markers={this.state.venue} onSlotSelected= {this.clickedSlot} onMapMounted={this.handleMapMounted} onDragend={this.dragend}/>
+                    <Map center={location} markers={this.state.venue} onSlotSelected= {this.clickedSlot} onMapMounted={this.handleMapMounted} onDragend={this.dragend} onMarkerOver={this.MarkerMouseOver}/>
               </div>
                 {this.state.SubSlots ? <ParkingSubList subslots={this.state.SubSlots.parkingSubSlots}
                  parkingslotid ={this.state.SubSlots.parkingSlotId} parkingName={this.state.parkingName} selectedSlot={this.state.selectedSlot} onChange={this.selectedSlot} onBooking = {this.bookParking} onPopUpClose ={this.onClose}/> : null}
