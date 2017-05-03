@@ -110,7 +110,7 @@ MarkerMouseOver(venueItem){
   }
 
   render() {
-    debugger;
+    
           let location ={
             lat:12.9816906,
             lng:77.6939942

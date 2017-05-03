@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import  carimage from '../../images/car.png';
 import  bikeimage from '../../images/motorbike.png';
 const ParkingSubList = ({subslots,parkingslotid,parkingName,onChange,selectedSlot,onBooking,onPopUpClose}) =>{
-  debugger;
+ //debugger;
 
 
 function close() {
